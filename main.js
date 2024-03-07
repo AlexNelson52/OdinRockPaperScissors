@@ -9,45 +9,6 @@ function getComputerChoice() {
 let playerScore = 0;
 let computerScore = 0;
 
-
-function playRound(playerSelection, computerSelection) {
-
-  // A variable that is declared inside a function only exists as long as the function runs. You need to move your var playerScore = 0; lines outside any function. 
-  // This is a crucial element of programming called scope
-
-  pScore.innerText = "Player Score : " + playerScore;
-  compSore.innerText = "Computer Score : " + computerScore;
-
-  if (playerScore === 5) {
-    return pText.innerText = `YOU HAVE WON!`
-  }
-  if (computerScore === 5) {
-    return pText.innerText = `You Have Loss :(`
-  }
-
-  if (playerSelection === computerSelection) {
-    pText.innerText = `Tie! you both picked ${playerSelection}`
-
-  }
-  if ((playerSelection === "rock" && computerSelection === 'scissors') ||
-    (playerSelection === "paper" && computerSelection === 'rock') ||
-    (playerSelection === "scissors" && computerSelection === "paper")) {
-
-    pText.innerText = `You win! ${playerSelection} beats ${computerSelection}`
-    return playerScore++;
-  }
-
-  if ((playerSelection === " scissors" && computerSelection === "rock") ||
-    (playerSelection === "rock" && computerSelection === 'paper') ||
-    playerSelection === "paper" && computerSelection === 'scissors') {
-
-    pText.innerText = `You lose! ${computerSelection} beats ${playerSelection} `
-    return computerScore++;
-  }
-}
-
-// let playerChoice = prompt("rock, paper or scissors").toLowerCase()
-
 const rockButton = document.createElement("button");
 const paperButton = document.createElement("button");
 const scissorsButton = document.createElement("button")
@@ -66,19 +27,72 @@ paperButton.textContent = "Paper"
 scissorsButton.textContent = "Scissors"
 
 
-
 rockButton.addEventListener("click", () => {
   getComputerChoice();
   playRound("rock", getComputerChoice())
 });
 
 paperButton.addEventListener("click", () => {
+  getComputerChoice();
   playRound("paper", getComputerChoice())
 })
 
 scissorsButton.addEventListener('click', () => {
+  getComputerChoice();
   playRound("scissors", getComputerChoice())
-})
+});
+
+
+function playRound(playerSelection, computerSelection) {
+
+  // A variable that is declared inside a function only exists as long as the function runs. You need to move your var playerScore = 0; lines outside any function. 
+  // This is a crucial element of programming called scope
+
+
+
+  if (playerScore === 5) {
+    return pText.innerText = `YOU HAVE WON!`
+  }
+  if (computerScore === 5) {
+    return pText.innerText = `You are a LOSER:(`
+  }
+
+  if (playerSelection === computerSelection) {
+    pText.innerText = `Tie! you both picked ${playerSelection}`
+
+  }
+  if ((playerSelection === "rock" && computerSelection === 'scissors') ||
+    (playerSelection === "paper" && computerSelection === 'rock') ||
+    (playerSelection === "scissors" && computerSelection === "paper")) {
+    playerScore++;
+    pText.innerText = `You win! ${playerSelection} beats ${computerSelection}`
+
+  }
+
+  if ((playerSelection === "scissors" && computerSelection === "rock") ||
+    (playerSelection === "rock" && computerSelection === "paper") ||
+    playerSelection === "paper" && computerSelection === "scissors") {
+    computerScore++;
+    pText.innerText = `You lose! ${computerSelection} beats ${playerSelection} `
+
+  }
+  pScore.innerText = "Player Score : " + playerScore;
+  compSore.innerText = "Computer Score : " + computerScore;
+}
+
+// let playerChoice = prompt("rock, paper or scissors").toLowerCase()
+
+
+document.body.appendChild(rockButton);
+document.body.appendChild(paperButton);
+document.body.appendChild(scissorsButton);
+
+document.body.style.textAlign = "center"
+
+
+
+
+
 
 const divScore = document.createElement("div");
 const pText = document.createElement("p");
